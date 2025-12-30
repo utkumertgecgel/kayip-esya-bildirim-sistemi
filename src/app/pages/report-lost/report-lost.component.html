@@ -1,0 +1,129 @@
+<div class="report-page">
+    <div class="page-container">
+        <!-- Başlık -->
+        <div class="page-header">
+            <mat-icon class="header-icon">report_problem</mat-icon>
+            <div class="header-text">
+                <h1>Kayıp Eşya Bildir</h1>
+                <p>Kaybettiğiniz eşyanın bilgilerini girerek bildirim oluşturun.</p>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <mat-card class="form-card">
+            <mat-card-content>
+                <form [formGroup]="lostForm" (ngSubmit)="onSubmit()">
+
+                    <!-- Eşya Bilgileri -->
+                    <h2 class="form-section-title">
+                        <mat-icon>category</mat-icon>
+                        Eşya Bilgileri
+                    </h2>
+
+                    <div class="form-row">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Kategori</mat-label>
+                            <mat-select formControlName="category">
+                                @for (cat of categories; track cat.value) {
+                                <mat-option [value]="cat.value">
+                                    <mat-icon>{{ cat.icon }}</mat-icon>
+                                    {{ cat.label }}
+                                </mat-option>
+                                }
+                            </mat-select>
+                            <mat-icon matPrefix>category</mat-icon>
+                            <mat-error>{{ getErrorMessage('category') }}</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Eşya Adı / Başlık</mat-label>
+                            <input matInput formControlName="title" placeholder="Örn: Siyah iPhone 13">
+                            <mat-icon matPrefix>title</mat-icon>
+                            <mat-error>{{ getErrorMessage('title') }}</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Açıklama</mat-label>
+                        <textarea matInput formControlName="description" rows="4"
+                            placeholder="Eşyanızın detaylı açıklamasını yazın (renk, marka, ayırt edici özellikler vb.)">
+            </textarea>
+                        <mat-icon matPrefix>description</mat-icon>
+                        <mat-hint>{{ lostForm.get('description')?.value?.length || 0 }} / 500</mat-hint>
+                        <mat-error>{{ getErrorMessage('description') }}</mat-error>
+                    </mat-form-field>
+
+                    <!-- Tarih ve Konum -->
+                    <h2 class="form-section-title">
+                        <mat-icon>location_on</mat-icon>
+                        Tarih ve Konum
+                    </h2>
+
+                    <div class="form-row">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Kaybedildiği Tarih</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="date" [max]="maxDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-icon matPrefix>calendar_today</mat-icon>
+                            <mat-error>{{ getErrorMessage('date') }}</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Kaybedildiği Konum</mat-label>
+                            <mat-select formControlName="location">
+                                @for (loc of locations; track loc) {
+                                <mat-option [value]="loc">{{ loc }}</mat-option>
+                                }
+                            </mat-select>
+                            <mat-icon matPrefix>location_on</mat-icon>
+                            <mat-error>{{ getErrorMessage('location') }}</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <!-- İletişim Bilgileri -->
+                    <h2 class="form-section-title">
+                        <mat-icon>contact_phone</mat-icon>
+                        İletişim Bilgileri
+                    </h2>
+
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Ad Soyad</mat-label>
+                        <input matInput formControlName="contactName" placeholder="İsminizi girin">
+                        <mat-icon matPrefix>person</mat-icon>
+                        <mat-error>{{ getErrorMessage('contactName') }}</mat-error>
+                    </mat-form-field>
+
+                    <div class="form-row">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Telefon Numarası</mat-label>
+                            <input matInput formControlName="contactPhone" placeholder="0532 123 45 67">
+                            <mat-icon matPrefix>phone</mat-icon>
+                            <mat-error>{{ getErrorMessage('contactPhone') }}</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>E-posta Adresi</mat-label>
+                            <input matInput formControlName="contactEmail" placeholder="ornek@email.com" type="email">
+                            <mat-icon matPrefix>email</mat-icon>
+                            <mat-error>{{ getErrorMessage('contactEmail') }}</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <!-- Butonlar -->
+                    <div class="form-actions">
+                        <button mat-button type="button" routerLink="/">
+                            <mat-icon>arrow_back</mat-icon>
+                            Geri Dön
+                        </button>
+                        <button mat-raised-button color="primary" type="submit" class="btn-primary">
+                            <mat-icon>send</mat-icon>
+                            Bildirimi Gönder
+                        </button>
+                    </div>
+
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

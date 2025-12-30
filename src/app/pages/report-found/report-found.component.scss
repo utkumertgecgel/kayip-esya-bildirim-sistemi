@@ -1,0 +1,129 @@
+.report-page {
+    background-color: #f1f8e9;
+    min-height: calc(100vh - 64px);
+    padding: 40px 0;
+}
+
+.page-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.page-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 32px;
+    padding: 24px;
+    background: linear-gradient(135deg, #388e3c 0%, #1b5e20 100%);
+    border-radius: 16px;
+    color: white;
+
+    .header-icon {
+        font-size: 48px;
+        width: 48px;
+        height: 48px;
+        opacity: 0.9;
+    }
+
+    .header-text {
+        h1 {
+            margin: 0 0 8px 0;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+    }
+}
+
+.form-card {
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+
+    mat-card-content {
+        padding: 32px;
+    }
+}
+
+.form-section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #2e7d32;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 24px 0 16px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #c8e6c9;
+
+    &:first-of-type {
+        margin-top: 0;
+    }
+
+    mat-icon {
+        font-size: 22px;
+        width: 22px;
+        height: 22px;
+        color: #4caf50;
+    }
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.full-width {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+mat-form-field {
+    width: 100%;
+
+    mat-icon[matPrefix] {
+        color: #81c784;
+        margin-right: 8px;
+    }
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    flex-wrap: wrap;
+    gap: 16px;
+
+    button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .btn-primary {
+        padding: 12px 32px;
+        font-size: 1rem;
+    }
+
+    .btn-found {
+        background-color: #388e3c !important;
+        color: white !important;
+    }
+}
+
+// Snackbar success style
+::ng-deep .success-snackbar {
+    background-color: #4caf50 !important;
+    color: white !important;
+}

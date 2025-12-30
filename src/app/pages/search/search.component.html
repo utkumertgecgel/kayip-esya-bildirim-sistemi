@@ -1,0 +1,107 @@
+<div class="search-page">
+    <div class="page-container">
+        <!-- Başlık -->
+        <div class="page-header">
+            <h1>
+                <mat-icon>search</mat-icon>
+                Eşya Ara
+            </h1>
+            <p>Kayıp veya bulunan eşyaları arayın ve filtreleyin.</p>
+        </div>
+
+        <!-- Filtreler -->
+        <mat-card class="filters-card">
+            <mat-card-content>
+                <form [formGroup]="searchForm">
+                    <!-- Arama Çubuğu -->
+                    <mat-form-field appearance="outline" class="search-field">
+                        <mat-label>Eşya Ara</mat-label>
+                        <input matInput formControlName="query" placeholder="Eşya adı veya açıklama...">
+                        <mat-icon matPrefix>search</mat-icon>
+                        @if (searchForm.get('query')?.value) {
+                        <button mat-icon-button matSuffix (click)="searchForm.patchValue({query: ''})">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                        }
+                    </mat-form-field>
+
+                    <!-- Filtre Satırı -->
+                    <div class="filters-row">
+                        <!-- Tür Seçimi -->
+                        <div class="filter-group">
+                            <label class="filter-label">Tür</label>
+                            <mat-button-toggle-group formControlName="type" class="type-toggle">
+                                <mat-button-toggle value="all">Tümü</mat-button-toggle>
+                                <mat-button-toggle value="lost">Kayıp</mat-button-toggle>
+                                <mat-button-toggle value="found">Bulundu</mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </div>
+
+                        <!-- Kategori -->
+                        <mat-form-field appearance="outline" class="filter-field">
+                            <mat-label>Kategori</mat-label>
+                            <mat-select formControlName="category">
+                                <mat-option value="all">Tüm Kategoriler</mat-option>
+                                @for (cat of categories; track cat.value) {
+                                <mat-option [value]="cat.value">
+                                    <mat-icon>{{ cat.icon }}</mat-icon>
+                                    {{ cat.label }}
+                                </mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+
+                        <!-- Konum -->
+                        <mat-form-field appearance="outline" class="filter-field">
+                            <mat-label>Konum</mat-label>
+                            <mat-select formControlName="location">
+                                <mat-option value="all">Tüm Konumlar</mat-option>
+                                @for (loc of locations; track loc) {
+                                <mat-option [value]="loc">{{ loc }}</mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+
+                        <!-- Filtreleri Temizle -->
+                        <button mat-stroked-button color="primary" (click)="clearFilters()" class="clear-btn">
+                            <mat-icon>filter_alt_off</mat-icon>
+                            Temizle
+                        </button>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+
+        <!-- Sonuç Bilgisi -->
+        <div class="results-info">
+            <span class="results-count">{{ totalResults }} sonuç bulundu</span>
+            @if (searchForm.get('type')?.value !== 'all') {
+            <mat-chip class="filter-chip">
+                {{ searchForm.get('type')?.value === 'lost' ? 'Kayıp' : 'Bulundu' }}
+            </mat-chip>
+            }
+            @if (searchForm.get('category')?.value !== 'all') {
+            <mat-chip class="filter-chip">
+                {{ getCategoryLabel(searchForm.get('category')?.value) }}
+            </mat-chip>
+            }
+        </div>
+
+        <!-- Sonuçlar -->
+        <div class="results-grid">
+            @for (item of filteredItems; track item.id) {
+            <app-item-card [item]="item"></app-item-card>
+            }
+            @empty {
+            <div class="no-results">
+                <mat-icon>search_off</mat-icon>
+                <h3>Sonuç Bulunamadı</h3>
+                <p>Arama kriterlerinize uygun eşya bulunamadı. Filtreleri değiştirmeyi deneyin.</p>
+                <button mat-raised-button color="primary" (click)="clearFilters()">
+                    Filtreleri Temizle
+                </button>
+            </div>
+            }
+        </div>
+    </div>
+</div>

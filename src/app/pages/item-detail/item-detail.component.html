@@ -1,0 +1,143 @@
+<div class="detail-page">
+    <div class="page-container">
+
+        @if (notFound) {
+        <!-- Eşya Bulunamadı -->
+        <div class="not-found">
+            <mat-icon>search_off</mat-icon>
+            <h1>Eşya Bulunamadı</h1>
+            <p>Aradığınız eşya sistemde bulunamadı.</p>
+            <button mat-raised-button color="primary" routerLink="/">
+                <mat-icon>home</mat-icon>
+                Ana Sayfaya Dön
+            </button>
+        </div>
+        } @else if (item) {
+        <!-- Geri Butonu -->
+        <button mat-button class="back-btn" (click)="goBack()">
+            <mat-icon>arrow_back</mat-icon>
+            Geri Dön
+        </button>
+
+        <!-- Ana Kart -->
+        <mat-card class="detail-card">
+            <!-- Durum Banner -->
+            <div class="status-banner" [ngClass]="item.type">
+                <div class="status-content">
+                    <mat-icon>{{ item.type === 'lost' ? 'report_problem' : 'check_circle' }}</mat-icon>
+                    <span class="status-text">{{ item.type === 'lost' ? 'Kayıp Eşya' : 'Bulunan Eşya' }}</span>
+                </div>
+                @if (item.status === 'resolved') {
+                <span class="resolved-badge">
+                    <mat-icon>verified</mat-icon>
+                    Teslim Edildi
+                </span>
+                }
+            </div>
+
+            <mat-card-content>
+                <!-- Başlık ve Kategori -->
+                <div class="item-header">
+                    <div class="category-badge">
+                        <mat-icon>{{ getCategoryIcon(item.category) }}</mat-icon>
+                    </div>
+                    <div class="header-info">
+                        <h1 class="item-title">{{ item.title }}</h1>
+                        <span class="item-category">{{ getCategoryLabel(item.category) }}</span>
+                    </div>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <!-- Açıklama -->
+                <section class="detail-section">
+                    <h2>
+                        <mat-icon>description</mat-icon>
+                        Açıklama
+                    </h2>
+                    <p class="description-text">{{ item.description }}</p>
+                </section>
+
+                <mat-divider></mat-divider>
+
+                <!-- Tarih ve Konum -->
+                <section class="detail-section">
+                    <h2>
+                        <mat-icon>info</mat-icon>
+                        Detaylar
+                    </h2>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <mat-icon>calendar_today</mat-icon>
+                            <div class="detail-info">
+                                <span class="detail-label">{{ item.type === 'lost' ? 'Kaybedildiği Tarih' : 'Bulunduğu
+                                    Tarih' }}</span>
+                                <span class="detail-value">{{ formatDate(item.date) }}</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <mat-icon>location_on</mat-icon>
+                            <div class="detail-info">
+                                <span class="detail-label">{{ item.type === 'lost' ? 'Kaybedildiği Konum' : 'Bulunduğu
+                                    Konum' }}</span>
+                                <span class="detail-value">{{ item.location }}</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <mat-icon>schedule</mat-icon>
+                            <div class="detail-info">
+                                <span class="detail-label">Bildirim Tarihi</span>
+                                <span class="detail-value">{{ formatDate(item.createdAt) }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <mat-divider></mat-divider>
+
+                <!-- İletişim Bilgileri -->
+                <section class="detail-section contact-section">
+                    <h2>
+                        <mat-icon>contact_phone</mat-icon>
+                        İletişim Bilgileri
+                    </h2>
+                    <div class="contact-card">
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <mat-icon>person</mat-icon>
+                                <span>{{ item.contactName }}</span>
+                            </div>
+                            <div class="contact-item">
+                                <mat-icon>phone</mat-icon>
+                                <a href="tel:{{ item.contactPhone }}">{{ item.contactPhone }}</a>
+                            </div>
+                            <div class="contact-item">
+                                <mat-icon>email</mat-icon>
+                                <a href="mailto:{{ item.contactEmail }}">{{ item.contactEmail }}</a>
+                            </div>
+                        </div>
+                        <button mat-stroked-button color="primary" (click)="copyContactInfo()">
+                            <mat-icon>content_copy</mat-icon>
+                            Kopyala
+                        </button>
+                    </div>
+                </section>
+            </mat-card-content>
+
+            <!-- Aksiyon Butonları -->
+            <mat-card-actions class="action-buttons">
+                @if (item.status === 'active') {
+                <button mat-raised-button color="accent" (click)="markAsResolved()">
+                    <mat-icon>check_circle</mat-icon>
+                    Teslim Edildi Olarak İşaretle
+                </button>
+                }
+                <a mat-raised-button color="primary" href="mailto:{{ item.contactEmail }}" class="btn-primary">
+                    <mat-icon>send</mat-icon>
+                    E-posta Gönder
+                </a>
+            </mat-card-actions>
+        </mat-card>
+        }
+    </div>
+</div>

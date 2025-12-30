@@ -1,0 +1,174 @@
+// Kayıp Eşya Bildirim Uygulaması
+// Purple-White Theme
+
+@use '@angular/material' as mat;
+
+// Custom purple palette
+$app-purple-palette: (
+  50: #f3e5f5,
+  100: #e1bee7,
+  200: #ce93d8,
+  300: #ba68c8,
+  400: #ab47bc,
+  500: #7b1fa2,
+  600: #6a1b9a,
+  700: #5c1a8c,
+  800: #4a148c,
+  900: #38006b,
+  contrast: (
+    50: rgba(0, 0, 0, 0.87),
+    100: rgba(0, 0, 0, 0.87),
+    200: rgba(0, 0, 0, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+html {
+  height: 100%;
+  @include mat.theme((
+    color: (
+      primary: mat.$violet-palette,
+      tertiary: mat.$magenta-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+body {
+  color-scheme: light;
+  background-color: #fafafa;
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+  margin: 0;
+  height: 100%;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+}
+
+// Custom CSS Variables
+:root {
+  --primary-purple: #7b1fa2;
+  --primary-purple-dark: #4a148c;
+  --primary-purple-light: #ce93d8;
+  --accent-color: #9c27b0;
+  --background-light: #fafafa;
+  --background-card: #ffffff;
+  --text-primary: #212121;
+  --text-secondary: #757575;
+  --border-color: #e0e0e0;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --error-color: #f44336;
+}
+
+// Global Styles
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-purple);
+}
+
+// Custom button styles
+.btn-primary {
+  background-color: var(--primary-purple) !important;
+  color: white !important;
+}
+
+.btn-secondary {
+  border: 2px solid var(--primary-purple) !important;
+  color: var(--primary-purple) !important;
+  background-color: transparent !important;
+}
+
+// Card hover effect
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(123, 31, 162, 0.15);
+  }
+}
+
+// Page container
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+// Section title
+.section-title {
+  color: var(--primary-purple-dark);
+  font-weight: 500;
+  margin-bottom: 16px;
+  font-size: 1.5rem;
+}
+
+// Status badges
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  
+  &.lost {
+    background-color: #ffebee;
+    color: #c62828;
+  }
+  
+  &.found {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+  }
+  
+  &.resolved {
+    background-color: #e3f2fd;
+    color: #1565c0;
+  }
+}
+
+// Category chip styles
+.category-chip {
+  background-color: var(--primary-purple-light) !important;
+  color: var(--primary-purple-dark) !important;
+}
+
+// Form field customization
+.mat-mdc-form-field {
+  width: 100%;
+}
+
+// Toolbar customization
+.mat-toolbar {
+  background-color: var(--primary-purple) !important;
+  color: white !important;
+}
+
+// Scrollbar styling
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-purple-light);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-purple);
+}

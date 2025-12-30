@@ -1,0 +1,38 @@
+<mat-toolbar class="navbar">
+  <div class="navbar-container">
+    <!-- Logo ve Başlık -->
+    <a routerLink="/" class="brand">
+      <mat-icon class="brand-icon">find_in_page</mat-icon>
+      <span class="brand-text">Kayıp Eşya Bildirimi</span>
+    </a>
+
+    <!-- Navigasyon Linkleri - Desktop -->
+    <nav class="nav-links">
+      @for (link of navLinks; track link.path) {
+        <a 
+          mat-button 
+          [routerLink]="link.path" 
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: link.path === '/'}"
+          class="nav-link">
+          <mat-icon>{{link.icon}}</mat-icon>
+          <span>{{link.label}}</span>
+        </a>
+      }
+    </nav>
+
+    <!-- Mobil Menü Butonu -->
+    <button mat-icon-button class="mobile-menu-btn" [matMenuTriggerFor]="mobileMenu">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <mat-menu #mobileMenu="matMenu">
+      @for (link of navLinks; track link.path) {
+        <a mat-menu-item [routerLink]="link.path">
+          <mat-icon>{{link.icon}}</mat-icon>
+          <span>{{link.label}}</span>
+        </a>
+      }
+    </mat-menu>
+  </div>
+</mat-toolbar>

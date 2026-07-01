@@ -258,7 +258,6 @@ Bu proje MIT Lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICE
 ## 📞 İletişim
 
 - **GitHub:** [@utkumertgecgel](https://github.com/utkumertgecgel)
-
 ---
 
 <p align="center">

@@ -1,6 +1,6 @@
 # 🔍 Kayıp Eşya Bildirim Sistemi
 
-Kampüslerde, iş yerlerinde ve toplu yaşam alanlarında kayıp ve bulunan eşyaların bildirilmesi, takibi ve sahiplerine ulaştırılması için geliştirilmiş modern web uygulaması.
+Kampüslerde, iş yerlerinde ve toplu yaşam alanlarında kayıp ve bulunan eşyaların bildirilmesi, takibi ve sahiplerine ulaştırılması için geliştirilmiş modern web uygulamasıdır.
 
 ![Angular](https://img.shields.io/badge/Angular-19-DD0031?style=flat-square&logo=angular)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat-square&logo=typescript)
